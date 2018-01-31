@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.pilat.repository.EventTableRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AddEventController {
 
+    @Autowired
     EventTableRepo er;
 
     @RequestMapping("/addevent")
@@ -44,8 +46,10 @@ public class AddEventController {
             
     ) {
 
-        String senderMail = "DUPA 1";
-        String recieverMail = "DUPA 2";
+        model.addAttribute("enumValues", EventType.values());
+        
+        String senderMail = null;
+        String recieverMail = null;
         
         
         EventTable et = new EventTable(0, eventNote, eventStartDate, eventEndDate, eventType, senderMail, recieverMail);
@@ -56,6 +60,6 @@ public class AddEventController {
 
         System.out.println("Zapisałem!" + " " + et.toString());
 
-        return "addAdress";
+        return "addevent";
     }
 }

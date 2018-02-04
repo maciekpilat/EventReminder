@@ -6,12 +6,14 @@
 package org.pilat.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -25,13 +27,15 @@ public class Scan {
     @GeneratedValue
     private long scanId;
     private String scanName;
+    // ręcznie zmienione na LONGBLOB w bazie bo adnotacja nie działa. Why???
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] data;
     @ManyToOne(cascade = CascadeType.REFRESH)
     private User userId;
 
-    @Override
-    public String toString() {
-        return "Scan{" + "scanId=" + scanId + ", scanName=" + scanName + ", data=" + data + ", userId=" + userId + '}';
+    public Scan(String scanName, byte[] data) {
+        this.scanName = scanName;
+        this.data = data;
     }
 
     
@@ -91,6 +95,12 @@ public class Scan {
     public void setUserId(User userId) {
         this.userId = userId;
     }
+
+
+    
+    
+
+    
 
     
 }

@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.pilat.model.Scan;
+import org.pilat.repository.ScanRepository;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -23,6 +26,9 @@ import java.nio.file.Paths;
  */
 @Controller
 public class AddScanController {
+    
+    @Autowired
+    ScanRepository scanRepository;
 
     private static String UPLOADED_FOLDER = "E://EVENTREMAINDER//";
 
@@ -35,7 +41,7 @@ public class AddScanController {
 
     // odebranie pliku i zapis
     @PostMapping("/addscan")
-    public String addAdressForm(@RequestParam("scan") MultipartFile scan, RedirectAttributes redirectAttributes) {
+    public String addAdressForm(@RequestParam("scanName") String scanName, @RequestParam("scan") MultipartFile scan, RedirectAttributes redirectAttributes) throws IOException {
 
         if (scan.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Wybierz skan dokumentu!");
@@ -56,7 +62,9 @@ public class AddScanController {
             e.printStackTrace();
         }
 
-        System.out.println(scan.toString());
+        // zapisuję obiekt do bazy
+        Scan s = new Scan(scanName, scan.getBytes());
+        scanRepository.save(s);
 
         return "redirect:/addscan";
     }

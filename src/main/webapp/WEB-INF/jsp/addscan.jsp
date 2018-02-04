@@ -30,6 +30,7 @@
     <h1>Dodaj skan</h1>
     <h2>Status: ${message}</h2>
     <form action="/addscan" method="post" enctype="multipart/form-data">
+        <input type="text" name="scanName">
         <input type="file" name="scan" accept="image/*">
         <input type="submit">
     </form>

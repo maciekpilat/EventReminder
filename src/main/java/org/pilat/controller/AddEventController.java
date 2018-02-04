@@ -45,7 +45,8 @@ public class AddEventController {
             @RequestParam("eventEndDate") Timestamp eventEndDate
             
     ) {
-
+        
+// ponownie ładuje dropdown
         model.addAttribute("enumValues", EventType.values());
         
         String senderMail = null;
@@ -55,9 +56,7 @@ public class AddEventController {
         EventTable et = new EventTable(0, eventNote, eventStartDate, eventEndDate, eventType, senderMail, recieverMail);
 
         System.out.println("Zapisuję!" + " " + et.toString());
-
         er.save(et);
-
         System.out.println("Zapisałem!" + " " + et.toString());
 
         return "addevent";

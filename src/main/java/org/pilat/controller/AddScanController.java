@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.pilat.model.Scan;
 import org.pilat.repository.ScanRepository;
+import org.pilat.utils.scanFtpUpload;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -62,9 +63,13 @@ public class AddScanController {
             e.printStackTrace();
         }
 
-        // zapisuję obiekt do bazy
+        // zapisuję obiekt do bazy MySQL zenbox
         Scan s = new Scan(scanName, scan.getBytes());
         scanRepository.save(s);
+        
+        //zapisanie do FTP zenbox
+        scanFtpUpload sfu = new scanFtpUpload();
+        sfu.uploadFileToFtp(scan.getBytes(), scanName);
 
         return "redirect:/addscan";
     }

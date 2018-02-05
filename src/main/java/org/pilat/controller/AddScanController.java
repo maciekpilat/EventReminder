@@ -70,7 +70,7 @@ public class AddScanController {
         
         //zapisanie do FTP zenbox
         scanFtpUpload sfu = new scanFtpUpload();
-        sfu.uploadFileToFtp(scan.getBytes(), scanName);
+        sfu.uploadFileToFtp(scan.getBytes(), scan.getOriginalFilename());
 
         return "redirect:/addscan";
     }

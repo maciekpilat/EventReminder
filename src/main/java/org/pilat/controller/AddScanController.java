@@ -53,6 +53,7 @@ public class AddScanController {
 
             // Tworzy plik i zapisuje tam gdzie wskazuje stala
             byte[] bytes = scan.getBytes();
+            System.out.println("Czy plik jest pusty: " + scan.isEmpty() + " a rozmiar to: " + scan.getSize());
             Path path = Paths.get(UPLOADED_FOLDER + scan.getOriginalFilename());
             Files.write(path, bytes);
 

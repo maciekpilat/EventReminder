@@ -25,19 +25,19 @@ public class Scan {
     @GeneratedValue
     private long scanId;
     private String scanName;
+    private String scanUrl;
     // ręcznie zmienione na LONGBLOB w bazie bo adnotacja nie działa. Why???
     @Column(columnDefinition = "LONGBLOB")
     private byte[] data;
     @ManyToOne(cascade = CascadeType.REFRESH)
     private User userId;
 
-    public Scan(String scanName, byte[] data) {
+    public Scan(String scanName, byte[] data, String scanUrl) {
         this.scanName = scanName;
         this.data = data;
+        this.scanUrl = scanUrl;
     }
 
-    
-    
     /**
      * @return the scanId
      */
@@ -67,6 +67,20 @@ public class Scan {
     }
 
     /**
+     * @return the scanUrl
+     */
+    public String getScanUrl() {
+        return scanUrl;
+    }
+
+    /**
+     * @param scanUrl the scanUrl to set
+     */
+    public void setScanUrl(String scanUrl) {
+        this.scanUrl = scanUrl;
+    }
+
+    /**
      * @return the data
      */
     public byte[] getData() {
@@ -93,12 +107,5 @@ public class Scan {
     public void setUserId(User userId) {
         this.userId = userId;
     }
-
-
-    
-    
-
-    
-
     
 }

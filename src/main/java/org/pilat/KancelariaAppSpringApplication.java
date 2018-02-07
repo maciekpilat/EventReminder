@@ -25,9 +25,7 @@ public class KancelariaAppSpringApplication extends SpringBootServletInitializer
 
     public static void main(String[] args) {
         SpringApplication.run(KancelariaAppSpringApplication.class, args);
-        UrlRequest r = new UrlRequest();
-        
-        //r.wysylamZapytanie();
+
 
     }
 }

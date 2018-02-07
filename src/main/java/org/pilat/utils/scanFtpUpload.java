@@ -27,7 +27,9 @@ public class scanFtpUpload {
             client.login("eventRemainder@maciekpilat.pl", "sys");
             client.enterLocalPassiveMode();
             // Store file to server / destination folder
-            client.changeWorkingDirectory("/eventRemainderScans");
+            //client.changeWorkingDirectory("/eventRemainderScans");
+            client.changeWorkingDirectory("/public_html/eventRemainderScans");
+            
             // ustawienie typu transferu dla ftp
             client.setFileType(client.BINARY_FILE_TYPE);// dodane ale nic nie zmienia
             client.setFileTransferMode(client.BINARY_FILE_TYPE); //dodane  ale nic nie zmienia

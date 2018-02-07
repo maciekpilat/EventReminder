@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
  */
 public class UrlRequest {
 
-    public void wysylamZapytanie() {
+    public void wysylamZapytanie(String scanUrl) {
 
         RestTemplate rest = new RestTemplate();
 
@@ -25,7 +25,8 @@ public class UrlRequest {
         String image = "https://i.imgur.com/jOOVhAh.jpg";
         String language = "pol";
         String fileType = "JPG";
-        String link = "https://i.imgur.com/jOOVhAh.jpg";
+        String link = scanUrl;
+        //String link = "https://i.imgur.com/jOOVhAh.jpg";
 
         String url = "https://api.ocr.space/parse/imageurl?apikey=" + ocrApiKey + "&url=" + image + "&language=" + language + "&isOverlayRequired=true";
         

@@ -5,6 +5,7 @@
  */
 package org.pilat.controller;
 
+import java.io.File;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,11 +15,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.pilat.model.Scan;
 import org.pilat.repository.ScanRepository;
 import org.pilat.utils.scanFtpUpload;
+import org.pilat.utils.ScanProcessing;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.pilat.ocr.UrlRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -27,7 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Controller
 public class AddScanController {
-    
+
     @Autowired
     ScanRepository scanRepository;
 
@@ -64,15 +67,31 @@ public class AddScanController {
             e.printStackTrace();
         }
 
-        // zapisuję obiekt do bazy MySQL zenbox
-        Scan s = new Scan(scanName, scan.getBytes());
-        scanRepository.save(s);
-        
-        //zapisanie do FTP zenbox
+//zapisanie do FTP zenbox i url do MySQL zenbox
         scanFtpUpload sfu = new scanFtpUpload();
         sfu.uploadFileToFtp(scan.getBytes(), scan.getOriginalFilename());
+// zapisuje dane i url dl MySQL zenbox
+        String scanUrl = "http://maciekpilat.pl/eventRemainderScans/" + scan.getOriginalFilename();
+        Scan s = new Scan(scanName, null, scanUrl);
+        scanRepository.save(s);
+        
+// wysyłam do OCR
+        UrlRequest r = new UrlRequest();
+        r.wysylamZapytanie(scanUrl);
 
         return "redirect:/addscan";
     }
 
 }
+
+//Scan s = new Scan(scanName, scan.getBytes(),scanUrl);
+// sprawdzanie rozmiaru i kompresja
+// zapisuję obiekt do bazy MySQL zenbox
+//Scan s = new Scan(scanName, scan.getBytes());
+//scanRepository.save(s);
+// sprawdzam rozmiar i kompresuję
+//        scanFtpUpload sfu = new scanFtpUpload();
+//        while (scan.getSize() > 900000) {
+//            ScanProcessing sp = new ScanProcessing();
+//            sp.resizeScanBytes(scan.getBytes());
+//        }

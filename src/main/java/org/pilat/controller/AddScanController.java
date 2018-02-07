@@ -16,6 +16,7 @@ import org.pilat.model.Scan;
 import org.pilat.repository.ScanRepository;
 import org.pilat.utils.scanFtpUpload;
 import org.pilat.utils.ScanProcessing;
+import org.pilat.utils.OcrResponseProcessing;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -77,7 +78,11 @@ public class AddScanController {
         
 // wysyłam do OCR
         UrlRequest r = new UrlRequest();
-        r.wysylamZapytanie(scanUrl);
+        //r.wysylamZapytanie(scanUrl); //jakby co odkomentuj
+
+// zamieniam rozpoznany ocr na liste slow
+OcrResponseProcessing orp = new OcrResponseProcessing();
+orp.ocrToWordsList(r.wysylamZapytanie(scanUrl));
 
         return "redirect:/addscan";
     }

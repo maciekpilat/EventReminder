@@ -5,9 +5,7 @@
  */
 package org.pilat.ocr;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -27,7 +25,7 @@ public class UrlRequest {
         String link = scanUrl;
         
 // sklejony link do API OCR
-        String url = "https://api.ocr.space/parse/imageurl?apikey=" + ocrApiKey + "&url=" + link + "&language=" + language; //+ "&isOverlayRequired=true";
+        String url = "https://api.ocr.space/parse/imageurl?apikey=" + ocrApiKey + "&url=" + link + "&language=" + language + "&isOverlayRequired=true";
 
 // wysłanie url GETem z doklejonymi parametrami i odebranie danych        
         String res = rest.getForObject(url, String.class);
@@ -36,6 +34,9 @@ public class UrlRequest {
         return res;
         
     }
+    
+
+    
 }
 
 //String url3 = "https://api.ocr.space/parse/imageurl?apikey=1f506d896a88957&url=https://i.imgur.com/jOOVhAh.jpg&language=pol&isOverlayRequired=true";

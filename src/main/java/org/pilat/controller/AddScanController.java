@@ -78,7 +78,6 @@ public class AddScanController {
         
 // wysyłam do OCR
         UrlRequest r = new UrlRequest();
-        //r.wysylamZapytanie(scanUrl); //jakby co odkomentuj
 
 // zamieniam rozpoznany ocr na liste slow
 OcrResponseProcessing orp = new OcrResponseProcessing();
@@ -100,3 +99,5 @@ orp.ocrToWordsList(r.wysylamZapytanie(scanUrl));
 //            ScanProcessing sp = new ScanProcessing();
 //            sp.resizeScanBytes(scan.getBytes());
 //        }
+
+//r.wysylamZapytanie(scanUrl); //jakby co odkomentuj

@@ -5,6 +5,7 @@
  */
 package org.pilat.utils;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
@@ -19,6 +20,12 @@ import com.google.gson.JsonSyntaxException;
 import org.pilat.model.Word;
 import org.pilat.model.WordsList;
 import com.google.gson.JsonObject;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  *
@@ -56,24 +63,38 @@ public class OcrResponseProcessing {
     }
 
 // zmienia JSON w liste slow
-    public WordsList jsonToList(String string) {
+    public List jsonToList(String string) throws IOException {
 
-        Gson gson = new Gson();
-        Object obj;
+//1. zamieniam string na Object
+        JSONObject jo1 = new JSONObject(string);
+//2. Object zamieniam na JSONArray
+        org.json.JSONArray ja1 = jo1.getJSONArray("ParsedResults");
+//3. Zeby czesc ktora chce wziac pakuje jako kolejny obiekt
+        JSONObject jo2 = ja1.getJSONObject(0);
+        JSONObject jo3 = jo2.getJSONObject("TextOverlay");
+        org.json.JSONArray ja2 = jo3.getJSONArray("Lines");
 
-        JsonParser parser = new JsonParser();
-        obj = parser.parse(string);
-        JsonObject jsonObject = (JsonObject) obj;
+       List<Word> wordsList = new ArrayList<Word>();
 
-        WordsList wordsList = gson.fromJson(jsonObject, WordsList.class);
+        for (int i = 0; i < ja2.length(); i++) {
+            JSONObject jo4 = ja2.getJSONObject(i);
+            org.json.JSONArray ja3 = jo4.getJSONArray("Words");
 
-            
-        
+            for (int e = 0; e < ja3.length(); e++) {
+                JSONObject jo5 = ja3.getJSONObject(e);
+
+                long left = jo5.getLong("Left");
+                long top = jo5.getLong("Top");
+                long height = jo5.getLong("Height");
+                String wordText = jo5.getString("WordText");
+                long width = jo5.getLong("Width");
+
+                Word word = new Word(wordText, left, top, height, width);
+
+                wordsList.add(word);
+            }
+        }
+
         return wordsList;
     }
-
 }
-
-//JSONObject jo = new JSONObject(string);
-//Gson gson = new GsonBuilder().create();
-        //Word word = gson.fromJson(jo.getJSONObject("word").toString(), Word.class);

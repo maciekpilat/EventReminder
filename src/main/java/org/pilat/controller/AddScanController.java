@@ -75,13 +75,16 @@ public class AddScanController {
         String scanUrl = "http://maciekpilat.pl/eventRemainderScans/" + scan.getOriginalFilename();
         Scan s = new Scan(scanName, null, scanUrl);
         scanRepository.save(s);
-        
+
 // wysyłam do OCR
         UrlRequest r = new UrlRequest();
 
 // zamieniam rozpoznany ocr na liste slow
-OcrResponseProcessing orp = new OcrResponseProcessing();
-orp.ocrToWordsList(r.wysylamZapytanie(scanUrl));
+        OcrResponseProcessing orp = new OcrResponseProcessing();
+        orp.ocrToWordsList(r.wysylamZapytanie(scanUrl));
+
+// zamiana na liste obiektow        
+        orp.jsonToList(r.wysylamZapytanie(scanUrl));
 
         return "redirect:/addscan";
     }

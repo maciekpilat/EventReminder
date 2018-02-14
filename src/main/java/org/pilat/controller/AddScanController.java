@@ -23,7 +23,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.pilat.ocr.UrlRequest;
+import org.pilat.repository.CourtNameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.pilat.model.CourtName;
 
 /**
  *
@@ -34,6 +36,8 @@ public class AddScanController {
 
     @Autowired
     ScanRepository scanRepository;
+    @Autowired
+    CourtNameRepository courtNameRepository;
 
     private static String UPLOADED_FOLDER = "E://EVENTREMAINDER//";
 
@@ -85,6 +89,12 @@ public class AddScanController {
 
 // zamiana na liste obiektow        
         orp.jsonToList(r.wysylamZapytanie(scanUrl));
+        
+        System.out.println("Zapisuję!");
+        CourtName cn = new CourtName("Sąd", "Rejonowy", "w");
+        System.out.println("Zapisuję: " + cn.toString());
+        courtNameRepository.save(cn);
+        System.out.println("Zapisałem!");
 
         return "redirect:/addscan";
     }

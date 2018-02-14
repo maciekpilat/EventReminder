@@ -91,9 +91,9 @@ public class AddScanController {
         orp.jsonToList(r.wysylamZapytanie(scanUrl));
         
         System.out.println("Zapisuję!");
-        CourtName cn = new CourtName("Sąd", "Rejonowy", "w");
-        System.out.println("Zapisuję: " + cn.toString());
-        courtNameRepository.save(cn);
+        //CourtName cn = new CourtName("Sąd", "Rejonowy", "w");
+        //System.out.println("Zapisuję: " + cn.toString());
+        System.out.println(courtNameRepository.findAll().toString());
         System.out.println("Zapisałem!");
 
         return "redirect:/addscan";

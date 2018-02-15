@@ -22,10 +22,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import org.pilat.ocr.UrlRequest;
 import org.pilat.repository.CourtNameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.pilat.model.CourtName;
+
 
 /**
  *
@@ -87,14 +89,17 @@ public class AddScanController {
         OcrResponseProcessing orp = new OcrResponseProcessing();
         orp.ocrToWordsList(r.wysylamZapytanie(scanUrl));
 
-// zamiana na liste obiektow        
+// zamiana JASON na liste obiektow        
         orp.jsonToList(r.wysylamZapytanie(scanUrl));
         
-        System.out.println("Zapisuję!");
-        //CourtName cn = new CourtName("Sąd", "Rejonowy", "w");
-        //System.out.println("Zapisuję: " + cn.toString());
-        System.out.println(courtNameRepository.findAll().toString());
-        System.out.println("Zapisałem!");
+
+// native query
+//System.out.println("To są pobrane kolumny 1: " + courtNameRepository.getCourtName1().toString()); // mozna usunac
+//System.out.println("To są pobrane kolumny 2: " + courtNameRepository.getCourtName2().toString()); // mozna usunac
+//System.out.println("To są pobrane kolumny 3: " + courtNameRepository.getCourtName3().toString()); // mozna usunac
+
+orp.courtAdressFinder(orp.jsonToList(r.wysylamZapytanie(scanUrl)));
+
 
         return "redirect:/addscan";
     }

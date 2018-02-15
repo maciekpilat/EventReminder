@@ -5,33 +5,28 @@
  */
 package org.pilat.utils;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 import java.util.stream.Collectors;
-import org.json.simple.JSONArray;
 import org.json.JSONObject;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
 import org.pilat.model.Word;
-import org.pilat.model.WordsList;
-import com.google.gson.JsonObject;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.Map;
+import org.pilat.repository.CourtNameRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.pilat.model.CourtName;
 
 /**
  *
  * @author Pilat
  */
 public class OcrResponseProcessing {
+
+    @Autowired
+    CourtNameRepository courtNameRepository;
+    
+    
+    
 
 // metoda bierze String i kazde słowo zapisuje jako String w liscie
     public String[] ocrToWordsList(String ocrString) {
@@ -74,7 +69,7 @@ public class OcrResponseProcessing {
         JSONObject jo3 = jo2.getJSONObject("TextOverlay");
         org.json.JSONArray ja2 = jo3.getJSONArray("Lines");
 
-       List<Word> wordsList = new ArrayList<Word>();
+        List<Word> wordsList = new ArrayList<Word>();
 
         for (int i = 0; i < ja2.length(); i++) {
             JSONObject jo4 = ja2.getJSONObject(i);
@@ -94,7 +89,57 @@ public class OcrResponseProcessing {
                 wordsList.add(word);
             }
         }
-
+        System.out.println("To jest lista, która powstaje z JSON: " + wordsList);
         return wordsList;
+    }
+
+    public void courtAdressFinder(List<Word> wordsList
+    //, List<CourtName> list1, List<CourtName> list2, List<CourtName> list3
+    ) {
+        
+        
+        List<CourtName> courtNameList1 = courtNameRepository.getCourtName1();
+        System.out.println("To jest lista z courtAdressFinder: " + courtNameList1.toString());
+//
+//        ArrayList<Word> wl = wordsList.toArray(Word);
+//        ArrayList<CourtName> courtNameList1 = list1.toArray(CourtName); //= courtNameRepository.getCourtName1();
+//        ArrayList<CourtName> courtNameList2 = list2.toArray(CourtName); //= courtNameRepository.getCourtName2();
+//        ArrayList<CourtName> courtNameList3 = list3.toArray(CourtName); //= courtNameRepository.getCourtName3();
+//
+//        ArrayList<String> finalCourtNameList = null;
+//
+//        for (Word w : wordsList) {
+//
+//            for (Object o : courtNameList1) {
+//
+//                if (w.getWordText() == o.toString()) {
+//                    finalCourtNameList.add(w.getWordText());
+//                    System.out.println("Znalazłem i zapisałem słowo z nazwy: " + finalCourtNameList.toString());
+//
+//                }
+//
+//            }
+//
+//        }
+
+//        for (int w = 0; w <= wordsList.size(); w++) {
+//
+//            for (int i = 0; i <= courtNameList2.size(); i++) {
+//
+//                if (wordsList.get(w).getWordText() == courtNameList2.get(i).toString()) {
+//                    finalCourtNameList.add(wordsList.get(w));
+//
+//                }
+//
+//            }
+//
+//        }
+        //courtNameRepository.getCourtName1().toString()
+        //Stream<Word> stream = wordsList.stream();
+        //stream = stream.filter(s -> s.getWordText().contains(); //courtNameRepository.getCourtName1().toString())
+        //List<Word> wynik = stream.collect(Collectors.toList());
+        //System.out.println(wynik.toString());        
+        //if(wynik.size()!= 0){           
+        //}
     }
 }

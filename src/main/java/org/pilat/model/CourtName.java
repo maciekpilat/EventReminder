@@ -25,7 +25,7 @@ public class CourtName {
     private String courtName2;
     private String courtName3;
 
-    public CourtName(String courtName1, String courtName2, String courtName3) {
+    CourtName(String courtName1, String courtName2, String courtName3) {
         this.courtName1 = courtName1;
         this.courtName2 = courtName2;
         this.courtName3 = courtName3;

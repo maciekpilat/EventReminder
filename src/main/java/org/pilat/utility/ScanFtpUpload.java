@@ -3,18 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.pilat.utils;
+package org.pilat.utility;
 
 import java.io.ByteArrayInputStream;
-import org.apache.commons.net.ftp.FTPClient;
 import java.io.IOException;
 import java.io.InputStream;
+import org.apache.commons.net.ftp.FTPClient;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Pilat
  */
-public class scanFtpUpload {
+@Service
+public class ScanFtpUpload {
 
     public void uploadFileToFtp(byte[] scanByte, String scanName) throws IOException {
         System.out.println("To jest nazwa pliku: " + scanName);
@@ -29,7 +31,7 @@ public class scanFtpUpload {
             // Store file to server / destination folder
             //client.changeWorkingDirectory("/eventRemainderScans");
             client.changeWorkingDirectory("/public_html/eventRemainderScans");
-            
+
             // ustawienie typu transferu dla ftp
             client.setFileType(client.BINARY_FILE_TYPE);// dodane ale nic nie zmienia
             client.setFileTransferMode(client.BINARY_FILE_TYPE); //dodane  ale nic nie zmienia

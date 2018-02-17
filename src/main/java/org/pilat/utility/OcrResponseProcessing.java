@@ -96,40 +96,42 @@ public class OcrResponseProcessing {
     public void courtAdressFinder(List<Word> wordsList) {
 
         List<String> finalCourtNameList = new ArrayList<>();
+        ArrayList<String> courtNameCol1 = courtNameRepository.getCourtName1();
+        ArrayList<String> courtNameCol2 = courtNameRepository.getCourtName2();
+        ArrayList<String> courtNameCol3 = courtNameRepository.getCourtName3();
+        System.out.println("courtNameCol1" + courtNameCol1);
+        System.out.println("courtNameCol2" + courtNameCol2);
+        System.out.println("courtNameCol3" + courtNameCol3);
 
-        int loopCycle1 = 0;
+        outerLoop:
+        for (int i = 0; i <= wordsList.size(); i++) {
 
-        for (Word w : wordsList) {
-
-            loopCycle1 = +1;
-
-            for (String s1 : courtNameRepository.getCourtName1()) {
-                if (s1.equalsIgnoreCase(w.getWordText().toString())) {
-                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + w.getWordText().toString());
-                    finalCourtNameList.add(w.getWordText().toString());
+            for (String s1 : courtNameCol1) {
+                if (s1.equalsIgnoreCase(wordsList.get(i).getWordText().toString())) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + wordsList.get(i).getWordText().toString());
+                    finalCourtNameList.add(wordsList.get(i).getWordText().toString());
+                }
+                break;
+            }
+            for (String s2 : courtNameCol2) {
+                if (s2.equalsIgnoreCase(wordsList.get(i).getWordText().toString())) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + wordsList.get(i).getWordText().toString());
+                    finalCourtNameList.add(wordsList.get(i).getWordText().toString());
 
                 }
                 break;
             }
-            
-            for (String s2 : courtNameRepository.getCourtName2()) {
-                if (s2.equalsIgnoreCase(w.getWordText().toString())) {
-                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + w.getWordText().toString());
-                    finalCourtNameList.add(w.getWordText().toString());
-
-                }
-                break;
-            }
-
-            for (String s3 : courtNameRepository.getCourtName3()) {
-                if (w.getWordText().toString().equalsIgnoreCase(s3)) {
-                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + w.getWordText().toString());
-                    finalCourtNameList.add(w.getWordText().toString());
-                    finalCourtNameList.add(wordsList.get(loopCycle1 + 2).getWordText().toString());
+            for (String s3 : courtNameCol3) {
+                if (wordsList.get(i).getWordText().toString().equalsIgnoreCase(s3)) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + wordsList.get(i).getWordText().toString());
+                    finalCourtNameList.add(wordsList.get(i).getWordText().toString());
+                    finalCourtNameList.add(wordsList.get(i + 1).getWordText().toString());
                     System.out.println("Nazwa sądu to: " + finalCourtNameList.toString());
+                    break outerLoop;
                 }
-                break;
+
             }
         }
+
     }
 }

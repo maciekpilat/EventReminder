@@ -15,6 +15,8 @@ import java.io.IOException;
 import org.pilat.repository.CourtNameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.pilat.model.CourtName;
+import org.pilat.model.Word;
 
 /**
  *
@@ -32,7 +34,7 @@ public class OcrResponseProcessing {
         String[] ocrWords = ocrString.split("\\s+");
         for (int i = 0; i < ocrWords.length; i++) {
             ocrWords[i] = ocrWords[i].replaceAll("[^\\w]", "");
-            System.out.println(ocrWords[i]);
+            //System.out.println(ocrWords[i]);
         }
         return ocrWords;
     }
@@ -87,56 +89,47 @@ public class OcrResponseProcessing {
                 wordsList.add(word);
             }
         }
-        System.out.println("To jest lista, która powstaje z JSON: " + wordsList);
+        //System.out.println("To jest lista, która powstaje z JSON: " + wordsList);
         return wordsList;
     }
 
-    public void courtAdressFinder(List<Word> wordsList
-    //, List<CourtName> list1, List<CourtName> list2, List<CourtName> list3
-    ) {
+    public void courtAdressFinder(List<Word> wordsList) {
 
-        //List<CourtName> courtNameList1 = courtNameRepository.getCourtName2();
-        System.out.println("To jest lista z courtAdressFinder: " + courtNameRepository.getCourtName1().toString());
-//
-//        ArrayList<Word> wl = wordsList.toArray(Word);
-//        ArrayList<CourtName> courtNameList1 = list1.toArray(CourtName); //= courtNameRepository.getCourtName1();
-//        ArrayList<CourtName> courtNameList2 = list2.toArray(CourtName); //= courtNameRepository.getCourtName2();
-//        ArrayList<CourtName> courtNameList3 = list3.toArray(CourtName); //= courtNameRepository.getCourtName3();
-//
-//        ArrayList<String> finalCourtNameList = null;
-//
-//        for (Word w : wordsList) {
-//
-//            for (Object o : courtNameList1) {
-//
-//                if (w.getWordText() == o.toString()) {
-//                    finalCourtNameList.add(w.getWordText());
-//                    System.out.println("Znalazłem i zapisałem słowo z nazwy: " + finalCourtNameList.toString());
-//
-//                }
-//
-//            }
-//
-//        }
+        List<String> finalCourtNameList = new ArrayList<>();
 
-//        for (int w = 0; w <= wordsList.size(); w++) {
-//
-//            for (int i = 0; i <= courtNameList2.size(); i++) {
-//
-//                if (wordsList.get(w).getWordText() == courtNameList2.get(i).toString()) {
-//                    finalCourtNameList.add(wordsList.get(w));
-//
-//                }
-//
-//            }
-//
-//        }
-        //courtNameRepository.getCourtName1().toString()
-        //Stream<Word> stream = wordsList.stream();
-        //stream = stream.filter(s -> s.getWordText().contains(); //courtNameRepository.getCourtName1().toString())
-        //List<Word> wynik = stream.collect(Collectors.toList());
-        //System.out.println(wynik.toString());        
-        //if(wynik.size()!= 0){           
-        //}
+        int loopCycle1 = 0;
+
+        for (Word w : wordsList) {
+
+            loopCycle1 = +1;
+
+            for (String s1 : courtNameRepository.getCourtName1()) {
+                if (s1.equalsIgnoreCase(w.getWordText().toString())) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + w.getWordText().toString());
+                    finalCourtNameList.add(w.getWordText().toString());
+
+                }
+                break;
+            }
+            
+            for (String s2 : courtNameRepository.getCourtName2()) {
+                if (s2.equalsIgnoreCase(w.getWordText().toString())) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + w.getWordText().toString());
+                    finalCourtNameList.add(w.getWordText().toString());
+
+                }
+                break;
+            }
+
+            for (String s3 : courtNameRepository.getCourtName3()) {
+                if (w.getWordText().toString().equalsIgnoreCase(s3)) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + w.getWordText().toString());
+                    finalCourtNameList.add(w.getWordText().toString());
+                    finalCourtNameList.add(wordsList.get(loopCycle1 + 2).getWordText().toString());
+                    System.out.println("Nazwa sądu to: " + finalCourtNameList.toString());
+                }
+                break;
+            }
+        }
     }
 }

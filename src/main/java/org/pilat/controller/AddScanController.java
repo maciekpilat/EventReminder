@@ -41,6 +41,7 @@ public class AddScanController {
     @Autowired
     CourtNameRepository courtNameRepository;
 
+
     private static String UPLOADED_FOLDER = "E://EVENTREMAINDER//";
 
     // wywołanie formularza
@@ -79,11 +80,9 @@ public class AddScanController {
 
 // zapisuje dane i url dl MySQL zenbox
         String scanUrl = "http://maciekpilat.pl/eventRemainderScans/" + scan.getOriginalFilename();
-        Scan s = new Scan(scanName, null, scanUrl); // odkomentuj
-
+        Scan s = new Scan(scanName, null, scanUrl);
         scanRepository.save(s);
 
-// wysyłam do OCR
 // zamieniam rozpoznany ocr na liste slow
         ocrResponseProcessing.ocrToWordsList(urlRequest.wysylamZapytanie(scanUrl));
 
@@ -91,7 +90,6 @@ public class AddScanController {
         ocrResponseProcessing.jsonToList(urlRequest.wysylamZapytanie(scanUrl));
 
 // native query
-        // tymczasowo rozpoznawanie wylaczone
         ocrResponseProcessing.courtAdressFinder(ocrResponseProcessing.jsonToList(urlRequest.wysylamZapytanie(scanUrl)));
 
         return "redirect:/addscan";

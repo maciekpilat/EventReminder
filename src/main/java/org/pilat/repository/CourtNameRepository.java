@@ -5,6 +5,7 @@
  */
 package org.pilat.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.pilat.model.CourtName;
@@ -19,11 +20,11 @@ import org.springframework.stereotype.Repository;
 public interface CourtNameRepository extends CrudRepository<CourtName, Long> {
     
     @Query("select cn.courtName1 from CourtName cn")
-    List<CourtName> getCourtName1();
+    ArrayList<String> getCourtName1();
 
     @Query("select cn.courtName2 from CourtName cn")
-    List<CourtName> getCourtName2();
+    ArrayList<String> getCourtName2();
 
     @Query("select cn.courtName3 from CourtName cn")
-    List<CourtName> getCourtName3();
+    ArrayList<String> getCourtName3();
 }

@@ -29,7 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Controller
 public class AddScanController {
-
+    
     @Autowired
     ScanRepository scanRepository;
     @Autowired
@@ -40,26 +40,25 @@ public class AddScanController {
     OcrResponseProcessing ocrResponseProcessing;
     @Autowired
     CourtNameRepository courtNameRepository;
-
-
+    
     private static String UPLOADED_FOLDER = "E://EVENTREMAINDER//";
 
     // wywołanie formularza
     @GetMapping("/addscan")
     public String addDocument() {
-
+        
         return "addscan";
     }
 
     // odebranie pliku i zapis
     @PostMapping("/addscan")
     public String addAdressForm(@RequestParam("scanName") String scanName, @RequestParam("scan") MultipartFile scan, RedirectAttributes redirectAttributes) throws IOException {
-
+        
         if (scan.isEmpty()) {
             redirectAttributes.addFlashAttribute("message", "Wybierz skan dokumentu!");
             return "redirect:addscan";
         }
-
+        
         try {
 
             // Tworzy plik i zapisuje tam gdzie wskazuje stala
@@ -67,10 +66,10 @@ public class AddScanController {
             System.out.println("Czy plik jest pusty: " + scan.isEmpty() + " a rozmiar to: " + scan.getSize());
             Path path = Paths.get(UPLOADED_FOLDER + scan.getOriginalFilename());
             Files.write(path, bytes);
-
+            
             redirectAttributes.addFlashAttribute("message",
                     "Zapisałeś plik: '" + scan.getOriginalFilename() + "'");
-
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -89,12 +88,14 @@ public class AddScanController {
 // zamiana JASON na liste obiektow        
         ocrResponseProcessing.jsonToList(urlRequest.wysylamZapytanie(scanUrl));
 
-// native query
+// znajduje nazwe sadu
         ocrResponseProcessing.courtAdressFinder(ocrResponseProcessing.jsonToList(urlRequest.wysylamZapytanie(scanUrl)));
 
+// znajduje nazwe wydzialu
+        ocrResponseProcessing.courtDepartmentNameFinder(ocrResponseProcessing.jsonToList(urlRequest.wysylamZapytanie(scanUrl)));
         return "redirect:/addscan";
     }
-
+    
 }
 
 //Scan s = new Scan(scanName, scan.getBytes(),scanUrl);

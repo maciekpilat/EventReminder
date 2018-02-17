@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.pilat.model.CourtName;
 import org.pilat.model.Word;
+import org.pilat.repository.CourtDepartmentNameRepository;
 
 /**
  *
@@ -27,6 +28,8 @@ public class OcrResponseProcessing {
 
     @Autowired
     CourtNameRepository courtNameRepository;
+    @Autowired
+    CourtDepartmentNameRepository courtDepartmentNameRepository;
 
 // metoda bierze String i kazde słowo zapisuje jako String w liscie
     public String[] ocrToWordsList(String ocrString) {
@@ -133,5 +136,55 @@ public class OcrResponseProcessing {
             }
         }
 
+    }
+
+    public void courtDepartmentNameFinder(List<Word> wordsList) {
+        List<String> finalCourtDepartmentNameList = new ArrayList<>();
+        ArrayList<String> courtDepartmentNameCol1 = courtDepartmentNameRepository.getCourtDepartmentName1();
+        ArrayList<String> courtDepartmentNameCol2 = courtDepartmentNameRepository.getCourtDepartmentName2();
+        ArrayList<String> courtDepartmentNameCol3 = courtDepartmentNameRepository.getCourtDepartmentName3();
+        ArrayList<String> courtDepartmentNameCol4 = courtDepartmentNameRepository.getCourtDepartmentName4();
+        ArrayList<String> courtDepartmentNameCol5 = courtDepartmentNameRepository.getCourtDepartmentName5();
+        ArrayList<String> courtDepartmentNameCol6 = courtDepartmentNameRepository.getCourtDepartmentName6();
+        ArrayList<String> courtDepartmentNameCol7 = courtDepartmentNameRepository.getCourtDepartmentName7();
+        ArrayList<String> courtDepartmentNameCol8 = courtDepartmentNameRepository.getCourtDepartmentName8();
+        System.out.println("courtDepartmentNameCol1: " + courtDepartmentNameRepository.getCourtDepartmentName1());
+        System.out.println("courtDepartmentNameCol2: " + courtDepartmentNameRepository.getCourtDepartmentName2());
+        System.out.println("courtDepartmentNameCol3: " + courtDepartmentNameRepository.getCourtDepartmentName3());
+        System.out.println("courtDepartmentNameCol4: " + courtDepartmentNameRepository.getCourtDepartmentName4());
+        System.out.println("courtDepartmentNameCol5: " + courtDepartmentNameRepository.getCourtDepartmentName5());
+        System.out.println("courtDepartmentNameCol6: " + courtDepartmentNameRepository.getCourtDepartmentName6());
+        System.out.println("courtDepartmentNameCol7: " + courtDepartmentNameRepository.getCourtDepartmentName7());
+        System.out.println("courtDepartmentNameCol8: " + courtDepartmentNameRepository.getCourtDepartmentName8());
+
+        outerLoop:
+        for (int i = 0; i <= wordsList.size(); i++) {
+
+            for (String s1 : courtDepartmentNameCol1) {
+                if (s1.equalsIgnoreCase(wordsList.get(i).getWordText().toString())) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + wordsList.get(i).getWordText().toString());
+                    finalCourtDepartmentNameList.add(wordsList.get(i).getWordText().toString());
+                }
+                break;
+            }
+            for (String s2 : courtDepartmentNameCol2) {
+                if (s2.equalsIgnoreCase(wordsList.get(i).getWordText().toString())) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + wordsList.get(i).getWordText().toString());
+                    finalCourtDepartmentNameList.add(wordsList.get(i).getWordText().toString());
+
+                }
+                break;
+            }
+            for (String s3 : courtDepartmentNameCol3) {
+                if (wordsList.get(i).getWordText().toString().equalsIgnoreCase(s3)) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + wordsList.get(i).getWordText().toString());
+                    finalCourtDepartmentNameList.add(wordsList.get(i).getWordText().toString());
+                    //finalCourtDepartmentNameList.add(wordsList.get(i + 1).getWordText().toString());
+                    System.out.println("Nazwa sądu to: " + finalCourtDepartmentNameList.toString());
+                    break outerLoop;
+                }
+
+            }
+        }
     }
 }

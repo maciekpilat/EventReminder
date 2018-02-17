@@ -6,12 +6,14 @@
 package org.pilat.ocr;
 
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 /**
  *
  * @author Pilat
  */
+@Service
 public class UrlRequest {
 
     public String wysylamZapytanie(String scanUrl) {

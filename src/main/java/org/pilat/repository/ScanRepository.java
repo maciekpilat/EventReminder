@@ -7,11 +7,13 @@ package org.pilat.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.pilat.model.Scan;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Pilat
  */
+@Repository
 public interface ScanRepository extends CrudRepository<Scan, Long>{
     
 }

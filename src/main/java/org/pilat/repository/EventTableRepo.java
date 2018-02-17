@@ -7,10 +7,12 @@ package org.pilat.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.pilat.model.EventTable;
+import org.springframework.stereotype.Repository;
 /**
  *
  * @author Pilat
  */
+@Repository
 public interface EventTableRepo extends CrudRepository<EventTable, Long>{
     
 }

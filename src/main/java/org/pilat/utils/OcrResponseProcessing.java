@@ -14,19 +14,17 @@ import org.pilat.model.Word;
 import java.io.IOException;
 import org.pilat.repository.CourtNameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.pilat.model.CourtName;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Pilat
  */
+@Component
 public class OcrResponseProcessing {
 
     @Autowired
     CourtNameRepository courtNameRepository;
-    
-    
-    
 
 // metoda bierze String i kazde słowo zapisuje jako String w liscie
     public String[] ocrToWordsList(String ocrString) {
@@ -96,10 +94,9 @@ public class OcrResponseProcessing {
     public void courtAdressFinder(List<Word> wordsList
     //, List<CourtName> list1, List<CourtName> list2, List<CourtName> list3
     ) {
-        
-        
-        List<CourtName> courtNameList1 = courtNameRepository.getCourtName1();
-        System.out.println("To jest lista z courtAdressFinder: " + courtNameList1.toString());
+
+        //List<CourtName> courtNameList1 = courtNameRepository.getCourtName2();
+        System.out.println("To jest lista z courtAdressFinder: " + courtNameRepository.getCourtName1().toString());
 //
 //        ArrayList<Word> wl = wordsList.toArray(Word);
 //        ArrayList<CourtName> courtNameList1 = list1.toArray(CourtName); //= courtNameRepository.getCourtName1();

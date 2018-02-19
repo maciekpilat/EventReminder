@@ -10,14 +10,13 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import org.json.JSONObject;
-import org.pilat.model.Word;
 import java.io.IOException;
 import org.pilat.repository.CourtNameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.pilat.model.CourtName;
 import org.pilat.model.Word;
 import org.pilat.repository.CourtDepartmentNameRepository;
+import org.pilat.repository.CourtFileReferenceRepository;
 
 /**
  *
@@ -30,6 +29,8 @@ public class OcrResponseProcessing {
     CourtNameRepository courtNameRepository;
     @Autowired
     CourtDepartmentNameRepository courtDepartmentNameRepository;
+    @Autowired
+    CourtFileReferenceRepository courtFileReferenceRepository;
 
 // metoda bierze String i kazde słowo zapisuje jako String w liscie
     public String[] ocrToWordsList(String ocrString) {
@@ -186,5 +187,137 @@ public class OcrResponseProcessing {
 
             }
         }
+    }
+
+    public void courtFileReferenceFinder(List<Word> wordsList) {
+        List<String> finalCourtFileReferenceColList = new ArrayList<>();
+        ArrayList<String> courtFileReferenceCol1 = courtFileReferenceRepository.courtFileReference1();
+        ArrayList<String> courtFileReferenceCol2 = courtFileReferenceRepository.courtFileReference2();
+        ArrayList<String> courtFileReferenceCol3 = courtFileReferenceRepository.courtFileReference3();
+        ArrayList<String> courtFileReferenceCol4 = courtFileReferenceRepository.courtFileReference4();
+        ArrayList<String> courtFileReferenceCol5 = courtFileReferenceRepository.courtFileReference5();
+        ArrayList<String> courtFileReferenceCol6 = courtFileReferenceRepository.courtFileReference6();
+        ArrayList<String> courtFileReferenceCol7 = courtFileReferenceRepository.courtFileReference7();
+        ArrayList<String> courtFileReferenceCol8 = courtFileReferenceRepository.courtFileReference8();
+        ArrayList<String> courtFileReferenceCol9 = courtFileReferenceRepository.courtFileReference9();
+        ArrayList<String> courtFileReferenceCol10 = courtFileReferenceRepository.courtFileReference10();
+        ArrayList<String> courtFileReferenceCol11 = courtFileReferenceRepository.courtFileReference11();
+        ArrayList<String> courtFileReferenceCol12 = courtFileReferenceRepository.courtFileReference12();
+
+        System.out.println("courtFileReferenceCol1: " + courtFileReferenceRepository.courtFileReference1());
+        System.out.println("courtFileReferenceCol2: " + courtFileReferenceRepository.courtFileReference2());
+        System.out.println("courtFileReferenceCol3: " + courtFileReferenceRepository.courtFileReference3());
+        System.out.println("courtFileReferenceCol4: " + courtFileReferenceRepository.courtFileReference4());
+        System.out.println("courtFileReferenceCol5: " + courtFileReferenceRepository.courtFileReference5());
+        System.out.println("courtFileReferenceCol6: " + courtFileReferenceRepository.courtFileReference6());
+        System.out.println("courtFileReferenceCol7: " + courtFileReferenceRepository.courtFileReference7());
+        System.out.println("courtFileReferenceCol8: " + courtFileReferenceRepository.courtFileReference8());
+        System.out.println("courtFileReferenceCol8: " + courtFileReferenceRepository.courtFileReference9());
+        System.out.println("courtFileReferenceCol8: " + courtFileReferenceRepository.courtFileReference10());
+        System.out.println("courtFileReferenceCol8: " + courtFileReferenceRepository.courtFileReference11());
+        System.out.println("courtFileReferenceCol8: " + courtFileReferenceRepository.courtFileReference12());
+
+        outerLoop:
+        for (int i = 0; i <= wordsList.size(); i++) {
+
+            for (String s1 : courtFileReferenceCol1) {
+                if (s1.equalsIgnoreCase(wordsList.get(i).getWordText().toString())) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + wordsList.get(i).getWordText().toString());
+                    finalCourtFileReferenceColList.add(wordsList.get(i).getWordText().toString());
+                }
+                break;
+            }
+            for (String s2 : courtFileReferenceCol2) {
+                if (s2.equalsIgnoreCase(wordsList.get(i).getWordText().toString())) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + wordsList.get(i).getWordText().toString());
+                    finalCourtFileReferenceColList.add(wordsList.get(i).getWordText().toString());
+
+                }
+                break;
+            }
+            for (String s2 : courtFileReferenceCol3) {
+                if (s2.equalsIgnoreCase(wordsList.get(i).getWordText().toString())) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + wordsList.get(i).getWordText().toString());
+                    finalCourtFileReferenceColList.add(wordsList.get(i).getWordText().toString());
+
+                }
+                break;
+            }
+            for (String s2 : courtFileReferenceCol4) {
+                if (s2.equalsIgnoreCase(wordsList.get(i).getWordText().toString())) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + wordsList.get(i).getWordText().toString());
+                    finalCourtFileReferenceColList.add(wordsList.get(i).getWordText().toString());
+
+                }
+                break;
+            }
+            for (String s2 : courtFileReferenceCol5) {
+                if (s2.equalsIgnoreCase(wordsList.get(i).getWordText().toString())) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + wordsList.get(i).getWordText().toString());
+                    finalCourtFileReferenceColList.add(wordsList.get(i).getWordText().toString());
+
+                }
+                break;
+            }
+            for (String s2 : courtFileReferenceCol6) {
+                if (s2.equalsIgnoreCase(wordsList.get(i).getWordText().toString())) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + wordsList.get(i).getWordText().toString());
+                    finalCourtFileReferenceColList.add(wordsList.get(i).getWordText().toString());
+
+                }
+                break;
+            }
+            for (String s2 : courtFileReferenceCol7) {
+                if (s2.equalsIgnoreCase(wordsList.get(i).getWordText().toString())) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + wordsList.get(i).getWordText().toString());
+                    finalCourtFileReferenceColList.add(wordsList.get(i).getWordText().toString());
+
+                }
+                break;
+            }
+            for (String s2 : courtFileReferenceCol8) {
+                if (s2.equalsIgnoreCase(wordsList.get(i).getWordText().toString())) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + wordsList.get(i).getWordText().toString());
+                    finalCourtFileReferenceColList.add(wordsList.get(i).getWordText().toString());
+
+                }
+                break;
+            }
+            for (String s2 : courtFileReferenceCol9) {
+                if (s2.equalsIgnoreCase(wordsList.get(i).getWordText().toString())) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + wordsList.get(i).getWordText().toString());
+                    finalCourtFileReferenceColList.add(wordsList.get(i).getWordText().toString());
+
+                }
+                break;
+            }
+            for (String s2 : courtFileReferenceCol10) {
+                if (s2.equalsIgnoreCase(wordsList.get(i).getWordText().toString())) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + wordsList.get(i).getWordText().toString());
+                    finalCourtFileReferenceColList.add(wordsList.get(i).getWordText().toString());
+
+                }
+                break;
+            }
+            for (String s2 : courtFileReferenceCol11) {
+                if (s2.equalsIgnoreCase(wordsList.get(i).getWordText().toString())) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + wordsList.get(i).getWordText().toString());
+                    finalCourtFileReferenceColList.add(wordsList.get(i).getWordText().toString());
+
+                }
+                break;
+            }
+            for (String s3 : courtFileReferenceCol12) {
+                if (wordsList.get(i).getWordText().toString().equalsIgnoreCase(s3)) {
+                    System.out.println("ZNALAZŁEEM!!!! Słowo: " + wordsList.get(i).getWordText().toString());
+                    finalCourtFileReferenceColList.add(wordsList.get(i).getWordText().toString());
+                    //finalCourtDepartmentNameList.add(wordsList.get(i + 1).getWordText().toString());
+                    System.out.println("Nazwa sądu to: " + finalCourtFileReferenceColList.toString());
+                    break outerLoop;
+                }
+
+            }
+        }
+
     }
 }

@@ -6,6 +6,8 @@
 package org.pilat.model;
 
 import java.sql.Timestamp;
+import java.util.List;
+import org.pilat.model.Scan;
 
 /**
  *
@@ -20,18 +22,33 @@ public class Event {
     private String eventNote;
     private Timestamp eventStartDate;
     private Timestamp eventEndDate;
+    private List<Scan> scansList;
 
     @Override
     public String toString() {
-        return "Event{" + "eventId=" + eventId + ", userId=" + userId + ", eventNote=" + eventNote + ", eventStartDate=" + eventStartDate + ", eventEndDate=" + eventEndDate + '}';
+        return "Event{" + "eventId=" + eventId + ", userId=" + userId + ", eventNote=" + eventNote + ", eventStartDate=" + eventStartDate + ", eventEndDate=" + eventEndDate + ", scansList=" + scansList + '}';
     }
 
-    public Event(long userId, String eventNote, Timestamp eventStartDate, Timestamp eventEndDate) {
+    //konstruktor na potrzeby wydarzen ze skanem
+    public Event(long eventId, long userId, String eventNote, Timestamp eventStartDate, Timestamp eventEndDate, List<Scan> scansList) {
+        this.eventId = eventId;
+        this.userId = userId;
+        this.eventNote = eventNote;
+        this.eventStartDate = eventStartDate;
+        this.eventEndDate = eventEndDate;
+        this.scansList = scansList;
+    }
+
+    //konstruktor na potrzeby wydarzen bez skanu
+    public Event(long userId,String eventNote, Timestamp eventStartDate, Timestamp eventEndDate) {
         this.userId = userId;
         this.eventNote = eventNote;
         this.eventStartDate = eventStartDate;
         this.eventEndDate = eventEndDate;
     }
+    
+    
+
     
     /**
      * @return the eventId
@@ -102,5 +119,20 @@ public class Event {
     public void setEventEndDate(Timestamp eventEndDate) {
         this.eventEndDate = eventEndDate;
     }
+
+    /**
+     * @return the scansList
+     */
+    public List<Scan> getScansList() {
+        return scansList;
+    }
+
+    /**
+     * @param scansList the scansList to set
+     */
+    public void setScansList(List<Scan> scansList) {
+        this.scansList = scansList;
+    }
+    
 
 }

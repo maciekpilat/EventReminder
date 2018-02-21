@@ -6,7 +6,6 @@
 package org.pilat.model;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -26,8 +25,7 @@ public class Scan {
     private long scanId;
     private String scanName;
     private String scanUrl;
-    // ręcznie zmienione na LONGBLOB w bazie bo adnotacja nie działa. Why???
-    @Column(columnDefinition = "LONGBLOB")
+    //@Column(columnDefinition = "LONGBLOB")
     private byte[] data;
     @ManyToOne(cascade = CascadeType.REFRESH)
     private User userId;

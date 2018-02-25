@@ -32,9 +32,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/addscan").access("hasRole('USER')")
                 .antMatchers("/addevent").access("hasRole('USER')")
+                .antMatchers("/addadress").access("hasRole('USER')")
                 .antMatchers("/").access("hasRole('USER')")
                 .and().formLogin()
                 ;
+        http.csrf().disable(); // potem to wlacz to od formularzy
     }
 
 }

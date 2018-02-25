@@ -105,12 +105,12 @@
         </table>
         <!--IKRYTY FORMULARZ DO PRZEKAZANIA DANYCH-->
         <form method="post" action="/addadress">               
-            <input type="hidden" id="adressStreetNumber1" value="">
-            <input type="hidden" id="adressStreetName1" value="">
-            <input type="hidden" id="adressCity1" value="">
-            <input type="hidden" id="adressAdministrativeArea1" value="">
-            <input type="hidden" id="adressPostalCode1" value="">
-            <input type="hidden" id="adressCountry1" value="">
+            <input type="hidden" name="adressStreetNumber1" id="adressStreetNumber1" value="">
+            <input type="hidden" name="adressStreetName1" id="adressStreetName1" value="">
+            <input type="hidden" name="adressCity1" id="adressCity1" value="">
+            <input type="hidden" name="adressAdministrativeArea1" id="adressAdministrativeArea1" value="">
+            <input type="hidden" name="adressPostalCode1" id="adressPostalCode1" value="">
+            <input type="hidden" name="adressCountry1" id="adressCountry1" value="">
 <!--GUZIK WYZWALA FUNKCJE I DODAJE DO FORMULARZA-->             
         <input type="submit" id="button1" >
         </form>

@@ -43,7 +43,6 @@ public class AddEventController {
             @RequestParam("eventNote") String eventNote,
             @RequestParam("eventStartDate") Timestamp eventStartDate,
             @RequestParam("eventEndDate") Timestamp eventEndDate
-            
     ) {
         
 // ponownie ładuje dropdown

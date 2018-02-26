@@ -123,6 +123,7 @@
             <input type="hidden" name="adressAdministrativeArea1" id="adressAdministrativeArea1" value="">
             <input type="hidden" name="adressPostalCode1" id="adressPostalCode1" value="">
             <input type="hidden" name="adressCountry1" id="adressCountry1" value="">
+            <input type="hidden" name="adressType1" id="adressType1" value="">
             <!--GUZIK WYZWALA FUNKCJE I DODAJE DO FORMULARZA-->             
             <input type="submit" id="button1" >
         </form>
@@ -194,6 +195,7 @@
                     var adressAdministrativeArea = document.getElementById("administrative_area_level_1").value;
                     var adressPostalCode = document.getElementById("postal_code").value;
                     var adressCountry = document.getElementById("country").value;
+                    var adressType = document.getElementById("selectAdressType").value;
                     console.log(adressStreetNumber);
                     console.log(adressStreetName);
                     console.log(adressCity);
@@ -208,6 +210,7 @@
                     document.getElementById('adressAdministrativeArea1').value = adressAdministrativeArea;
                     document.getElementById('adressPostalCode1').value = adressPostalCode;
                     document.getElementById('adressCountry1').value = adressCountry;
+                    document.getElementById('adressType1').value = adressType;
                 };
             });
         </script>

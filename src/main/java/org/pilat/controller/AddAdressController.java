@@ -18,6 +18,8 @@ import org.pilat.repository.AdressTypeRepository;
 import org.pilat.model.AdressType;
 import org.pilat.utility.IterableToCollection;
 import org.springframework.ui.Model;
+import org.pilat.model.Adress;
+import org.pilat.repository.AdressRepository;
 
 /**
  *
@@ -33,6 +35,8 @@ public class AddAdressController {
     AdressTypeRepository adressTypeRepository;
     @Autowired
     IterableToCollection iterableToCollection;
+    @Autowired
+    AdressRepository adressRepository;
 
     @RequestMapping("/addadress")
     public String addAdress(Model model) {
@@ -45,21 +49,19 @@ public class AddAdressController {
 
     @PostMapping(value = "/addadress")
     public String getAdress(
+            @RequestParam("adressType1") long adressType,
             @RequestParam("adressStreetNumber1") String adressStreetNumber,
             @RequestParam("adressStreetName1") String adressStreetName,
             @RequestParam("adressCity1") String sdressCity,
+            @RequestParam("adressAdministrativeArea1") String adressAdministrative,
             @RequestParam("adressPostalCode1") String adressPostalCode,
             @RequestParam("adressCountry1") String adressCountry,
-            @RequestParam("adressAdministrativeArea1") String adressAdministrative,
-            @RequestParam("adressType1") String adressType,
             Model model) {
-     
+
         List<AdressType> list = iterableToCollection.makeCollection(adressTypeRepository.findAll());
         model.addAttribute("lists", list);
         
-        System.out.println("ODPALAM POST");
-        System.out.println(adressStreetName);
-        System.out.println(adressType);
+        adressRepository.save(new Adress(adressType, adressStreetNumber, adressStreetName, sdressCity, adressAdministrative, adressPostalCode, adressCountry));
 
         return "addadress";
     }

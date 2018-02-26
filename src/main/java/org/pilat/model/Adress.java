@@ -21,7 +21,7 @@ public class Adress {
     @Id
     @GeneratedValue
     private long adressId;
-    private long adressCategory;
+    private long adressType;
     private String adressStreetNumber;
     private String adressStreetName;
     private String adressCity;
@@ -29,8 +29,8 @@ public class Adress {
     private String adressPostalCode;
     private String adressCountry;
 
-    public Adress(long adressCategory, String adressStreetNumber, String adressStreetName, String adressCity, String adressAdministrativeArea, String adressPostalCode, String adressCountry) {
-        this.adressCategory = adressCategory;
+    public Adress(long adressType, String adressStreetNumber, String adressStreetName, String adressCity, String adressAdministrativeArea, String adressPostalCode, String adressCountry) {
+        this.adressType = adressType;
         this.adressStreetNumber = adressStreetNumber;
         this.adressStreetName = adressStreetName;
         this.adressCity = adressCity;
@@ -60,15 +60,15 @@ public class Adress {
     /**
      * @return the adressCategory
      */
-    public long getAdressCategory() {
-        return adressCategory;
+    public long getAdressType() {
+        return adressType;
     }
 
     /**
      * @param adressCategory the adressCategory to set
      */
-    public void setAdressCategory(long adressCategory) {
-        this.adressCategory = adressCategory;
+    public void setAdressType(long adressType) {
+        this.adressType = adressType;
     }
 
     /**

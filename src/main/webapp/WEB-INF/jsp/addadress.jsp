@@ -202,6 +202,7 @@
                     console.log(adressAdministrativeArea);
                     console.log(adressPostalCode);
                     console.log(adressCountry);
+                    console.log(adressType);
 
 // !!! wstawiam dane do ukrytego formularza !!!
                     document.getElementById('adressStreetNumber1').value = adressStreetNumber;

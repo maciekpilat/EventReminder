@@ -7,6 +7,7 @@ package org.pilat.model;
 
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,14 +25,18 @@ public class User {
 @GeneratedValue
 private long userId;
 private String userMail;
+@Column(nullable = false, unique = true)
+private String userLogin;
 private String userPassword;
 @OneToMany(cascade = CascadeType.REFRESH)
 private List<Scan> scanList;
 
     @Override
     public String toString() {
-        return "User{" + "userId=" + userId + ", userMail=" + userMail + ", userPassword=" + userPassword + ", scanList=" + scanList + '}';
+        return "User{" + "userId=" + userId + ", userMail=" + userMail + ", userLogin=" + getUserLogin() + ", userPassword=" + userPassword + ", scanList=" + scanList + '}';
     }
+
+
 
 
     /**
@@ -88,6 +93,20 @@ private List<Scan> scanList;
      */
     public void setScanList(List<Scan> scanList) {
         this.scanList = scanList;
+    }
+
+    /**
+     * @return the userLogin
+     */
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    /**
+     * @param userLogin the userLogin to set
+     */
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 
 

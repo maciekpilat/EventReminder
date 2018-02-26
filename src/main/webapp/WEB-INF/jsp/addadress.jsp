@@ -46,8 +46,8 @@
                 color: #303030;
             }
             #address {
-/*                border: 1px solid #000090;
-                background-color: #f0f0ff;*/
+                /*                border: 1px solid #000090;
+                                background-color: #f0f0ff;*/
                 width: 480px;
                 padding-right: 2px;
             }
@@ -103,6 +103,18 @@
                                                          id="country" disabled="true"></input></td>
             </tr>
         </table>
+
+        <!--RODZAJ ADRESU-->
+        <select id="selectAdressType" name="adressType">
+            <c:forEach items="${lists}" var="t">
+                <option value="${t.adressTypeId}">${t.adressTypeName}</option>
+            </c:forEach>
+        </select><br><br>
+
+
+
+
+
         <!--IKRYTY FORMULARZ DO PRZEKAZANIA DANYCH-->
         <form method="post" action="/addadress">               
             <input type="hidden" name="adressStreetNumber1" id="adressStreetNumber1" value="">
@@ -111,8 +123,8 @@
             <input type="hidden" name="adressAdministrativeArea1" id="adressAdministrativeArea1" value="">
             <input type="hidden" name="adressPostalCode1" id="adressPostalCode1" value="">
             <input type="hidden" name="adressCountry1" id="adressCountry1" value="">
-<!--GUZIK WYZWALA FUNKCJE I DODAJE DO FORMULARZA-->             
-        <input type="submit" id="button1" >
+            <!--GUZIK WYZWALA FUNKCJE I DODAJE DO FORMULARZA-->             
+            <input type="submit" id="button1" >
         </form>
         <script>
 
@@ -187,8 +199,8 @@
                     console.log(adressCity);
                     console.log(adressAdministrativeArea);
                     console.log(adressPostalCode);
-                    console.log(adressCity);
-                    
+                    console.log(adressCountry);
+
 // !!! wstawiam dane do ukrytego formularza !!!
                     document.getElementById('adressStreetNumber1').value = adressStreetNumber;
                     document.getElementById('adressStreetName1').value = adressStreetName;

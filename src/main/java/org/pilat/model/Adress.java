@@ -8,6 +8,7 @@ package org.pilat.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -28,6 +29,12 @@ public class Adress {
     private String adressAdministrativeArea;
     private String adressPostalCode;
     private String adressCountry;
+    @ManyToOne
+    private CourtDepartment courtDepartment;
+    @ManyToOne
+    private Client client;
+    @ManyToOne
+    private Court court;
 
     public Adress(long adressType, String adressStreetNumber, String adressStreetName, String adressCity, String adressAdministrativeArea, String adressPostalCode, String adressCountry) {
         this.adressType = adressType;
@@ -42,7 +49,6 @@ public class Adress {
     public Adress() {
     }
 
-    
     /**
      * @return the adressId
      */
@@ -154,6 +160,47 @@ public class Adress {
     public void setAdressCountry(String adressCountry) {
         this.adressCountry = adressCountry;
     }
-    
+
+    /**
+     * @return the client
+     */
+    public Client getClient() {
+        return client;
+    }
+
+    /**
+     * @param client the client to set
+     */
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    /**
+     * @return the court
+     */
+    public Court getCourt() {
+        return court;
+    }
+
+    /**
+     * @param court the court to set
+     */
+    public void setCourt(Court court) {
+        this.court = court;
+    }
+
+    /**
+     * @return the courtDepartment
+     */
+    public CourtDepartment getCourtDepartment() {
+        return courtDepartment;
+    }
+
+    /**
+     * @param courtDepartment the courtDepartment to set
+     */
+    public void setCourtDepartment(CourtDepartment courtDepartment) {
+        this.courtDepartment = courtDepartment;
+    }
     
 }

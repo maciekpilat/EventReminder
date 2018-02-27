@@ -5,30 +5,30 @@
  */
 package org.pilat.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import org.springframework.stereotype.Controller;
-import org.pilat.repository.SetStreetNameRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-import org.pilat.repository.AdressTypeRepository;
-import org.pilat.model.AdressType;
-import org.pilat.utility.IterableToCollection;
-import org.springframework.ui.Model;
 import org.pilat.model.Adress;
+import org.pilat.model.AdressType;
 import org.pilat.repository.AdressRepository;
+import org.pilat.repository.AdressTypeRepository;
+import org.pilat.repository.SetStreetNameRepository;
+import org.pilat.utility.IterableToCollection;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
  * @author Pilat
  */
+
+
+
 @Controller
-
-public class AddAdressController {
-
+public class AddClientController {
+    
     @Autowired
     SetStreetNameRepository setStreetNameRepository;
     @Autowired
@@ -37,18 +37,17 @@ public class AddAdressController {
     IterableToCollection iterableToCollection;
     @Autowired
     AdressRepository adressRepository;
-
-    @RequestMapping("/addadress")
-    public String addAdressGet(Model model) {
-
-        List<AdressType> list = iterableToCollection.makeCollection(adressTypeRepository.findAll());
+    
+    @GetMapping("/addclient")
+    public String addClientGet(Model model){
+        
+                List<AdressType> list = iterableToCollection.makeCollection(adressTypeRepository.findAll());
         model.addAttribute("lists", list);
-
-        return "addadress";
+        
+        return "addclient";
     }
-
-    @PostMapping(value = "/addadress")
-    public String addAdressPost(
+    @PostMapping("/addclient")
+    public String addClientPost(
             @RequestParam("adressType1") long adressType,
             @RequestParam("adressStreetNumber1") String adressStreetNumber,
             @RequestParam("adressStreetName1") String adressStreetName,
@@ -56,13 +55,14 @@ public class AddAdressController {
             @RequestParam("adressAdministrativeArea1") String adressAdministrative,
             @RequestParam("adressPostalCode1") String adressPostalCode,
             @RequestParam("adressCountry1") String adressCountry,
-            Model model) {
-
+            Model model){
+        
         List<AdressType> list = iterableToCollection.makeCollection(adressTypeRepository.findAll());
         model.addAttribute("lists", list);
         
-        adressRepository.save(new Adress(adressType, adressStreetNumber, adressStreetName, sdressCity, adressAdministrative, adressPostalCode, adressCountry));
-
-        return "addadress";
+        adressRepository.save(new Adress(adressType, adressStreetNumber, adressStreetName, sdressCity, adressAdministrative, adressPostalCode, adressCountry));        
+        
+        return "addclient";
     }
+    
 }

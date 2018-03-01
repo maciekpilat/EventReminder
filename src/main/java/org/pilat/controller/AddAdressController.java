@@ -61,7 +61,7 @@ public class AddAdressController {
         List<AdressType> list = iterableToCollection.makeCollection(adressTypeRepository.findAll());
         model.addAttribute("lists", list);
         
-        adressRepository.save(new Adress(adressType, adressStreetNumber, adressStreetName, sdressCity, adressAdministrative, adressPostalCode, adressCountry));
+        adressRepository.save(new Adress(adressType, adressStreetNumber, adressStreetName, sdressCity, adressAdministrative, adressPostalCode, adressCountry, null, null, null));
 
         return "addadress";
     }

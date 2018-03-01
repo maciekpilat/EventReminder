@@ -13,6 +13,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -25,12 +26,13 @@ public class CourtDepartment {
     @GeneratedValue
     private Long departmentId;
     @ManyToOne
+    @JoinColumn(name = "courtId")
     private Court court;
-    @OneToMany
+    @OneToMany(mappedBy = "courtDepartment")
     private List<Adress> adres;
-    @OneToMany
+    @OneToMany(mappedBy = "courtDepartment")
     private List<ContactData> contactData;
-    @OneToMany
+    @OneToMany(mappedBy = "courtDepartment")
     private List<Lawsuit> lawsuit;
 
     /**

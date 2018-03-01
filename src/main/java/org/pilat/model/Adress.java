@@ -5,9 +5,12 @@
  */
 package org.pilat.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -29,14 +32,17 @@ public class Adress {
     private String adressAdministrativeArea;
     private String adressPostalCode;
     private String adressCountry;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "departmentId")
     private CourtDepartment courtDepartment;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "clientId")
     private Client client;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "courtId")
     private Court court;
 
-    public Adress(long adressType, String adressStreetNumber, String adressStreetName, String adressCity, String adressAdministrativeArea, String adressPostalCode, String adressCountry) {
+    public Adress(long adressType, String adressStreetNumber, String adressStreetName, String adressCity, String adressAdministrativeArea, String adressPostalCode, String adressCountry, CourtDepartment courtDepartment, Client client, Court court) {
         this.adressType = adressType;
         this.adressStreetNumber = adressStreetNumber;
         this.adressStreetName = adressStreetName;
@@ -44,7 +50,12 @@ public class Adress {
         this.adressAdministrativeArea = adressAdministrativeArea;
         this.adressPostalCode = adressPostalCode;
         this.adressCountry = adressCountry;
+        this.courtDepartment = courtDepartment;
+        this.client = client;
+        this.court = court;
     }
+
+
 
     public Adress() {
     }
@@ -202,5 +213,6 @@ public class Adress {
     public void setCourtDepartment(CourtDepartment courtDepartment) {
         this.courtDepartment = courtDepartment;
     }
+    
     
 }

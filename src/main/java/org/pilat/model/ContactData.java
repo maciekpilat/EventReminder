@@ -5,9 +5,11 @@
  */
 package org.pilat.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.pilat.model.CourtDepartment;
@@ -32,7 +34,8 @@ private String mail3;
 private String else1;
 private String else2;
 private String else3;
-@ManyToOne
+@ManyToOne(cascade = CascadeType.ALL)
+@JoinColumn(name = "courtDepartmentId")
 private CourtDepartment courtDepartment;
 
 

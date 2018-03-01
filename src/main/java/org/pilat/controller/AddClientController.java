@@ -8,8 +8,10 @@ package org.pilat.controller;
 import java.util.List;
 import org.pilat.model.Adress;
 import org.pilat.model.AdressType;
+import org.pilat.model.Client;
 import org.pilat.repository.AdressRepository;
 import org.pilat.repository.AdressTypeRepository;
+import org.pilat.repository.ClientRepository;
 import org.pilat.repository.SetStreetNameRepository;
 import org.pilat.utility.IterableToCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +25,9 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author Pilat
  */
-
-
-
 @Controller
 public class AddClientController {
-    
+
     @Autowired
     SetStreetNameRepository setStreetNameRepository;
     @Autowired
@@ -37,15 +36,18 @@ public class AddClientController {
     IterableToCollection iterableToCollection;
     @Autowired
     AdressRepository adressRepository;
-    
+    @Autowired
+    ClientRepository clientRepository;
+
     @GetMapping("/addclient")
-    public String addClientGet(Model model){
-        
-                List<AdressType> list = iterableToCollection.makeCollection(adressTypeRepository.findAll());
+    public String addClientGet(Model model) {
+
+        List<AdressType> list = iterableToCollection.makeCollection(adressTypeRepository.findAll());
         model.addAttribute("lists", list);
-        
+
         return "addclient";
     }
+
     @PostMapping("/addclient")
     public String addClientPost(
             @RequestParam("adressType1") long adressType,
@@ -55,14 +57,21 @@ public class AddClientController {
             @RequestParam("adressAdministrativeArea1") String adressAdministrative,
             @RequestParam("adressPostalCode1") String adressPostalCode,
             @RequestParam("adressCountry1") String adressCountry,
-            Model model){
-        
+            @RequestParam("clientTitle") String clientTitle,
+            @RequestParam("clientFirstName") String clientFirstName,
+            @RequestParam("clientLastName") String clientLastName,
+            @RequestParam("clientCompanyName") String clientCompanyName,
+            Model model) {
+
+        // na potrzeby dropdown z bazy danych
         List<AdressType> list = iterableToCollection.makeCollection(adressTypeRepository.findAll());
         model.addAttribute("lists", list);
+
+        Client client = new Client(adressType, clientTitle, clientFirstName, clientLastName, clientCompanyName, null, null);
         
-        adressRepository.save(new Adress(adressType, adressStreetNumber, adressStreetName, sdressCity, adressAdministrative, adressPostalCode, adressCountry));        
-        
+        adressRepository.save(new Adress(adressType, adressStreetNumber, adressStreetName, sdressCity, adressAdministrative, adressPostalCode, adressCountry, null, client, null));
+        clientRepository.save(client);
         return "addclient";
     }
-    
+
 }

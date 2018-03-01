@@ -27,10 +27,14 @@ public class Court {
     @GeneratedValue
     private long courtId;
     private String courtName;
-    @OneToMany
+    
+    @OneToMany(mappedBy = "court")
     private List<Adress> adress;
-    @OneToMany
-    private List<CourtDepartment> courtDepartmentList;
+    
+    @OneToMany(mappedBy = "court")
+    private List<CourtDepartment> courtDepartment;
+    
+    
     
 
     /**
@@ -64,15 +68,15 @@ public class Court {
     /**
      * @return the courtDepartmentList
      */
-    public List<CourtDepartment> getCourtDepartmentList() {
-        return courtDepartmentList;
+    public List<CourtDepartment> getCourtDepartment() {
+        return courtDepartment;
     }
 
     /**
      * @param courtDepartmentList the courtDepartmentList to set
      */
-    public void setCourtDepartmentList(List<CourtDepartment> courtDepartmentList) {
-        this.courtDepartmentList = courtDepartmentList;
+    public void setCourtDepartment(List<CourtDepartment> courtDepartment) {
+        this.courtDepartment = courtDepartment;
     }
 
     /**

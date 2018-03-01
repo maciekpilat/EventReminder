@@ -6,9 +6,11 @@
 package org.pilat.model;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,16 +22,22 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class Lawsuit {
+    
     @Id
     @GeneratedValue
     private long lawsuitId;
     private String courtFileReference;
-//    @ManyToOne
-//    private Court court; //Sad
-    @ManyToOne
+
+    @ManyToOne()
+    @JoinColumn(name = "courtDepartmentId")
     private CourtDepartment courtDepartment;
-    @OneToMany
+    
+    @OneToMany(mappedBy = "lawsuit")
     private List<Party> party;
+    
+    @ManyToOne()
+    @JoinColumn(name = "clientId")
+    private Client client;
 
     /**
      * @return the lawsuitId
@@ -100,4 +108,19 @@ public class Lawsuit {
     public void setParty(List<Party> party) {
         this.party = party;
     }
+
+    /**
+     * @return the client
+     */
+    public Client getClient() {
+        return client;
+    }
+
+    /**
+     * @param client the client to set
+     */
+    public void setClient(Client client) {
+        this.client = client;
+    }
+    
 }

@@ -7,7 +7,9 @@ package org.pilat.model;
 
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,20 +22,34 @@ import org.pilat.model.Adress;
 @Entity
 @Table
 public class Client {
-
-    private long clientId;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long clientId;
     private long clientType; // osoba fizyczna firma
-    private long clientTitle;
+    private String clientTitle;
     private String clientFirstName;
     private String clientLastName;
     private String clientCompanyName;
-    @OneToMany
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private List<Adress> clientAdress;
-    @OneToMany
+    @OneToMany(mappedBy = "client",fetch = FetchType.LAZY)
     private List<Lawsuit> clientLawsuit;
 
+    public Client(long clientType, String clientTitle, String clientFirstName, String clientLastName, String clientCompanyName, List<Adress> clientAdress, List<Lawsuit> clientLawsuit) {
+        this.clientType = clientType;
+        this.clientTitle = clientTitle;
+        this.clientFirstName = clientFirstName;
+        this.clientLastName = clientLastName;
+        this.clientCompanyName = clientCompanyName;
+        this.clientAdress = clientAdress;
+        this.clientLawsuit = clientLawsuit;
+    }
+
+    public Client() {
+    }
+
+    
+    
     /**
      * @return the clientId
      */
@@ -65,14 +81,14 @@ public class Client {
     /**
      * @return the clientTitle
      */
-    public long getClientTitle() {
+    public String getClientTitle() {
         return clientTitle;
     }
 
     /**
      * @param clientTitle the clientTitle to set
      */
-    public void setClientTitle(long clientTitle) {
+    public void setClientTitle(String clientTitle) {
         this.clientTitle = clientTitle;
     }
 

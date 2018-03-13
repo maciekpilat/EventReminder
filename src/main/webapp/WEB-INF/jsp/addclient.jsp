@@ -130,6 +130,27 @@
             <!--GUZIK WYZWALA FUNKCJE I DODAJE DO FORMULARZA-->             
             <input type="submit" id="button1" >
         </form>
+
+        <br><br/>
+        <br><br/>
+
+        <table id="clientTable">
+            <tr>
+                <th>Tytul</th>
+                <th>Imię klienta</th>
+                <th>Nazwisko Klienta</th>
+                <th>Firma</th>
+            </tr>
+            <c:forEach items="${clientsList}" var="client">
+                <tr>
+                    <th>${client.clientTitle}</th>
+                    <th>${client.clientFirstName}</th>
+                    <th>${client.clientLastName}</th>
+                    <th>${client.clientCompanyName}</th>
+                </tr>
+            </c:forEach>            
+        </table>
+
         <script>
 
             var placeSearch, autocomplete;

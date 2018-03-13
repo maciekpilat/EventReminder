@@ -42,8 +42,16 @@ public class AddClientController {
     @GetMapping("/addclient")
     public String addClientGet(Model model) {
 
+        //dropdown z bazy danych
         List<AdressType> list = iterableToCollection.makeCollection(adressTypeRepository.findAll());
         model.addAttribute("lists", list);
+        
+        // wyswietlam klientow
+        List<Client> clientsList = iterableToCollection.makeCollection(clientRepository.findAll());
+        model.addAttribute("clientsList", clientsList);
+        
+        
+        
 
         return "addclient";
     }
@@ -66,6 +74,10 @@ public class AddClientController {
         // na potrzeby dropdown z bazy danych
         List<AdressType> list = iterableToCollection.makeCollection(adressTypeRepository.findAll());
         model.addAttribute("lists", list);
+        
+        // wyświetlam klientow
+        List<Client> clientsList = iterableToCollection.makeCollection(clientRepository.findAll());
+        model.addAttribute("clientsList", clientsList);
 
         Client client = new Client(adressType, clientTitle, clientFirstName, clientLastName, clientCompanyName, null, null);
         

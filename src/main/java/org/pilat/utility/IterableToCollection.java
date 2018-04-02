@@ -18,11 +18,13 @@ import org.springframework.stereotype.Component;
 public class IterableToCollection {
     
 public static <E> List<E> makeCollection(Iterable<E> iter) {
+    System.out.println("ITERACJA" + iter.toString());
     List<E> list = new ArrayList<E>();
     for (E item : iter) {
         list.add(item);
         System.out.println(list.toString());
     }
+    System.out.println("KOLEKCJA" + list.toString());
     return list;
 }
 }

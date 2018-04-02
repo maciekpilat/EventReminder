@@ -25,6 +25,7 @@ public class CourtDepartment {
     @Id
     @GeneratedValue
     private Long departmentId;
+    private String courtDepartmentName;
     @ManyToOne
     @JoinColumn(name = "courtId")
     private Court court;
@@ -103,6 +104,20 @@ public class CourtDepartment {
      */
     public void setLawsuit(List<Lawsuit> lawsuit) {
         this.lawsuit = lawsuit;
+    }
+
+    /**
+     * @return the courtDepartmentName
+     */
+    public String getCourtDepartmentName() {
+        return courtDepartmentName;
+    }
+
+    /**
+     * @param courtDepartmentName the courtDepartmentName to set
+     */
+    public void setCourtDepartmentName(String courtDepartmentName) {
+        this.courtDepartmentName = courtDepartmentName;
     }
     
 }

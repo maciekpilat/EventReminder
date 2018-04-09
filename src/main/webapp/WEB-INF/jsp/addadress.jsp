@@ -79,28 +79,22 @@
         <table id="address">
             <tr>
                 <td class="label">Ulica</td>
-                <td class="slimField"><input class="field" id="street_number"
-                                             disabled="true"></input></td>
-                <td class="wideField" colspan="2"><input class="field" id="route"
-                                                         disabled="true"></input></td>
+                <td class="slimField"><input class="field" id="street_number" disabled="true"></input></td>
+                <td class="wideField" colspan="2"><input class="field" id="route" disabled="true"></input></td>
             </tr>
             <tr>
                 <td class="label">Miasto</td>
-                <td class="wideField" colspan="3"><input class="field" id="locality"
-                                                         disabled="true"></input></td>
+                <td class="wideField" colspan="3"><input class="field" id="locality" disabled="true"></input></td>
             </tr>
             <tr>
                 <td class="label">Wojewodztwo</td>
-                <td class="slimField"><input class="field"
-                                             id="administrative_area_level_1" disabled="true"></input></td>
+                <td class="slimField"><input class="field" id="administrative_area_level_1" disabled="true"></input></td>
                 <td class="label">Kod pocztowy</td>
-                <td class="wideField"><input class="field" id="postal_code"
-                                             disabled="true"></input></td>
+                <td class="wideField"><input class="field" id="postal_code" disabled="true"></input></td>
             </tr>
             <tr>
                 <td class="label">Kraj</td>
-                <td class="wideField" colspan="3"><input class="field"
-                                                         id="country" disabled="true"></input></td>
+                <td class="wideField" colspan="3"><input class="field" id="country" disabled="true"></input></td>
             </tr>
         </table>
 

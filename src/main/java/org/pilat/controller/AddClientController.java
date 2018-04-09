@@ -79,7 +79,7 @@ public class AddClientController {
         List<Client> clientsList = iterableToCollection.makeCollection(clientRepository.findAll());
         model.addAttribute("clientsList", clientsList);
 
-        Client client = new Client(adressType, clientTitle, clientFirstName, clientLastName, clientCompanyName, null, null);
+        Client client = new Client(adressType, clientTitle, clientFirstName, clientLastName, clientCompanyName, null, null, null);
         
         adressRepository.save(new Adress(adressType, adressStreetNumber, adressStreetName, sdressCity, adressAdministrative, adressPostalCode, adressCountry, null, client, null));
         clientRepository.save(client);

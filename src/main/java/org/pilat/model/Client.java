@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.pilat.model.Adress;
+import org.pilat.model.Party;
 
 /**
  *
@@ -34,8 +35,10 @@ public class Client {
     private List<Adress> clientAdress;
     @OneToMany(mappedBy = "client",fetch = FetchType.LAZY)
     private List<Lawsuit> clientLawsuit;
+    @OneToMany
+    private List<Party> party;
 
-    public Client(long clientType, String clientTitle, String clientFirstName, String clientLastName, String clientCompanyName, List<Adress> clientAdress, List<Lawsuit> clientLawsuit) {
+    public Client(long clientType, String clientTitle, String clientFirstName, String clientLastName, String clientCompanyName, List<Adress> clientAdress, List<Lawsuit> clientLawsuit, List<Party> party) {
         this.clientType = clientType;
         this.clientTitle = clientTitle;
         this.clientFirstName = clientFirstName;
@@ -43,6 +46,7 @@ public class Client {
         this.clientCompanyName = clientCompanyName;
         this.clientAdress = clientAdress;
         this.clientLawsuit = clientLawsuit;
+        this.party = party;
     }
 
     public Client() {
@@ -160,6 +164,20 @@ public class Client {
      */
     public void setClientLawsuit(List<Lawsuit> clientLawsuit) {
         this.clientLawsuit = clientLawsuit;
+    }
+
+    /**
+     * @return the party
+     */
+    public List<Party> getParty() {
+        return party;
+    }
+
+    /**
+     * @param party the party to set
+     */
+    public void setParty(List<Party> party) {
+        this.party = party;
     }
 
     

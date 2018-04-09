@@ -10,11 +10,13 @@ import java.util.ArrayList;
 import org.pilat.model.CourtDepartment;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Pilat
  */
+@Repository
 public interface CourtDepartmentRepository extends CrudRepository<CourtDepartment, Long>{
   
     

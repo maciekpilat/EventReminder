@@ -1,17 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.pilat.model;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
+import org.pilat.model.Client;
 
 /**
  *
@@ -25,11 +24,14 @@ public class Party {
     @GeneratedValue
     private long partyId;
     private long partyType; //powod / pozwany
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Client client;
     @OneToMany
     private List<Adress> adres;
     @ManyToOne
     private Lawsuit lawsuit;
 
+    
     /**
      * @return the partyId
      */
@@ -84,6 +86,20 @@ public class Party {
      */
     public void setLawsuit(Lawsuit lawsuit) {
         this.lawsuit = lawsuit;
+    }
+
+    /**
+     * @return the client
+     */
+    public Client getClient() {
+        return client;
+    }
+
+    /**
+     * @param client the client to set
+     */
+    public void setClient(Client client) {
+        this.client = client;
     }
 
 }

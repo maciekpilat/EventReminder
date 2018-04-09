@@ -5,15 +5,14 @@
  */
 package org.pilat.repository;
 
+import java.io.Serializable;
 import org.springframework.data.repository.CrudRepository;
-import org.pilat.model.AdressType;
-import org.springframework.stereotype.Repository;
+import org.pilat.model.PartyType;
 
 /**
  *
  * @author Pilat
  */
-@Repository
-public interface AdressTypeRepository extends CrudRepository<AdressType, Long>{
+public interface PartyTypeRepository extends CrudRepository<PartyType, Long>{
     
 }

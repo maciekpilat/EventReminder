@@ -8,11 +8,13 @@ package org.pilat.repository;
 import java.io.Serializable;
 import org.springframework.data.repository.CrudRepository;
 import org.pilat.model.Client;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Pilat
  */
+@Repository
 public interface ClientRepository extends CrudRepository<Client, Long>{
     
 }

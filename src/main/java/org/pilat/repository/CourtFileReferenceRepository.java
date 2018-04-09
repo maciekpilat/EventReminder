@@ -10,11 +10,13 @@ import java.util.ArrayList;
 import org.springframework.data.repository.CrudRepository;
 import org.pilat.model.CourtFileReference;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Pilat
  */
+@Repository
 public interface CourtFileReferenceRepository extends CrudRepository<CourtFileReference, Long> {
 
     @Query("select cfr.courtFileReference1 from CourtFileReference cfr")

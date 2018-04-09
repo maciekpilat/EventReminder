@@ -32,7 +32,7 @@
                 </div>
             </div>
             <!--action - gdzie odeslac dane z formularza po nacisnieciu submit-->
-            <form:form method="POST" action="/addparty" modelAttribute="aaa">
+            <form:form method="POST" action="/addparty" modelAttribute="party">
                 <div class="row">
 
                     <div class="col-lg-2">
@@ -49,7 +49,7 @@
                         <input type="text" placeholder="Tytul" path="client.clientTitle"/>
                     </div>
                     <div class="col-lg-2">
-                        <input type="text" placeholder="Imie" path="client.clientFirstName"/>
+                        <input type="text" placeholder="Imie" path="partyType.client"/>
                     </div>
                     <div class="col-lg-2">
                         <input type="text" placeholder="Nazwisko" path="client.clientLastName"/>
